@@ -91,8 +91,7 @@ public class PaintBucket : MonoBehaviour
             if (renderer != null)
             {
                 renderer.transform.localScale = Vector3.zero;
-                renderer.gameObject.SetActive(true);
-
+                
                 float t = 0;
                 float speed = 10f; // Faster animation
                 while (t < 1)

@@ -27,6 +27,7 @@ public class GameplayController : MonoBehaviour
     
     [Header("References")]
     [SerializeField] private PaintBucket _paintBucket;
+    [SerializeField] private CameraShaker _cameraShaker;
     [SerializeField] private Mover _mover;
     [SerializeField] private Transform _itemParent;                  // Parent to keep hierarchy clean
     [SerializeField] private GameObject _fallingItemPrefab;
@@ -106,6 +107,7 @@ public class GameplayController : MonoBehaviour
         }
         else
         {
+            _cameraShaker.Shake();
             UiController.Instance.ShowMinusOne(_paintBucket.transform.position);
             _paintBucket.OnWrongItemCollected();
             GameData.CurrentLives--;

@@ -1486,6 +1486,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1567,6 +1568,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c37d604a372084f78a4969433075568b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &668030335
 GameObject:
   m_ObjectHideFlags: 0
@@ -2304,6 +2317,7 @@ MonoBehaviour:
   - colorKeyType: 6
     colorValue: {r: 0.9411765, g: 0.5019608, b: 0.5019608, a: 1}
   _paintBucket: {fileID: 868411283}
+  _cameraShaker: {fileID: 519420033}
   _mover: {fileID: 1444054781}
   _itemParent: {fileID: 712071153}
   _fallingItemPrefab: {fileID: 1179370969}
