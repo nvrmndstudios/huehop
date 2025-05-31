@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,6 +33,7 @@ public class PaintBucket : MonoBehaviour
     {
         _isGamePlaying = true;
         gameObject.SetActive(true);
+        _failCount = 0;
         for (int i = 0; i < visuals.Count; i++)
         {
             visuals[i].gameObject.SetActive(true);
@@ -54,6 +56,22 @@ public class PaintBucket : MonoBehaviour
         UpdateColorVisual();
     }
 
+    public void OnCorrectItemCollected()
+    {
+        StartCoroutine(AnimateScaleVisualsForward());
+    }
+    private int _failCount = 0;
+
+    public void OnWrongItemCollected()
+    {
+        int indexToHide = visuals.Count - 1 - _failCount;
+        if (indexToHide >= 0 && visuals[indexToHide] != null)
+        {
+            visuals[indexToHide].gameObject.SetActive(false);
+            _failCount++;
+        }
+    }
+
     private void UpdateColorVisual()
     {
         if (visuals == null || visuals.Count == 0) return;
@@ -63,6 +81,29 @@ public class PaintBucket : MonoBehaviour
             if (renderer != null)
             {
                 renderer.color = _currentColorMap.colorValue;
+            }
+        }
+    }
+    private IEnumerator AnimateScaleVisualsForward()
+    {
+        foreach (var renderer in visuals)
+        {
+            if (renderer != null)
+            {
+                renderer.transform.localScale = Vector3.zero;
+                renderer.gameObject.SetActive(true);
+
+                float t = 0;
+                float speed = 10f; // Faster animation
+                while (t < 1)
+                {
+                    t += Time.deltaTime * speed;
+                    renderer.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, t);
+                    yield return null;
+                }
+
+                renderer.transform.localScale = Vector3.one;
+                yield return new WaitForSeconds(0.01f); // Faster delay between each
             }
         }
     }

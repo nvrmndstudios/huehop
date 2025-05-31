@@ -100,10 +100,14 @@ public class GameplayController : MonoBehaviour
         {
             GameData.CurrentScore++;
             UiController.Instance.UpdateScore(GameData.CurrentScore);
+            UiController.Instance.ShowPlusOne(_paintBucket.transform.position);
+            _paintBucket.OnCorrectItemCollected();
             _paintBucket.SetColor(GetRandomColorMap()); // <=== Add this
         }
         else
         {
+            UiController.Instance.ShowMinusOne(_paintBucket.transform.position);
+            _paintBucket.OnWrongItemCollected();
             GameData.CurrentLives--;
             UiController.Instance.UpdateLife(GameData.CurrentLives);
 
