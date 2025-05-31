@@ -4,6 +4,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    
+    [SerializeField] private GameplayController gameplayController;
 
     public enum GameState
     {
@@ -125,6 +127,7 @@ public class GameManager : MonoBehaviour
     private void EnterGameplay()
     {
         Debug.Log("Entered Gameplay");
+        gameplayController.StartGame();
         UiController.Instance.ShowOnlyGameplay();
 
         GameData.CurrentScore = 0;
