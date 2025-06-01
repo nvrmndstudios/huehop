@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UiController : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class UiController : MonoBehaviour
 
     [Header("Menu Screen UI")]
     public TMP_Text highScoreText;
+    public List<Image> soundSprites;
 
     [Header("Gameplay UI")]
     public TMP_Text scoreText;
@@ -110,11 +112,13 @@ public class UiController : MonoBehaviour
 
     public void OnClickRestart()
     {
+        SoundManager.Instance.PlayClick();
         GameManager.Instance.ChangeState(GameManager.GameState.Gameplay);
     }
 
     public void OnClickHome()
     {
+        SoundManager.Instance.PlayClick();
         GameManager.Instance.ChangeState(GameManager.GameState.Menu);
     }
     
@@ -169,4 +173,11 @@ public class UiController : MonoBehaviour
 
         Destroy(instance);
     }
+
+    public void ToggleSound()
+    {
+        bool isSoundOn = SoundManager.Instance.ToggleSound();
+        soundSprites[0].gameObject.SetActive(!isSoundOn);
+        soundSprites[1].gameObject.SetActive(isSoundOn);
+    } 
 }
